@@ -39,12 +39,12 @@ class MobilenetConfig:
 LARGE_BBONE = BackboneConfig(
     kernels=[3]*3 + [5]*3 + [3]*6 + [5]*3,
     out_channels=[16, 24, 24, 40, 40, 40, 80, 80,
-                  80, 80, 112, 112, 160, 160, 160],
+                  80, 80, 112, 112, 112, 160, 160],
     expansion_sizes=[16, 64, 72, 72, 120, 120, 240, 200,
                      184, 184, 480, 672, 672, 672, 960],
     ses=[False]*3 + [True]*3 + [False]*4 + [True]*5,
     nonlinearities=['relu6']*6 + ['hswish']*9,
-    strides=[1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2]
+    strides=[1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1]
     )
 
 SMALL_BBONE = BackboneConfig(
