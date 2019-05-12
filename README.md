@@ -15,7 +15,7 @@
 
 ### Example 1 (how to create MobileNetV3 large for classification):
 
-```{python}
+```python
 from mn3.nets import MobilenetV3
 import mn3.config as config
 
@@ -23,7 +23,7 @@ net = MobilenetV3(config.LARGE, n_classes=1000) # MobileNetV3 large
 ```
 
 ### Example 2 (how to create MobileNetV3 small backbone):
-```{python}
+```python
 from mn3.nets import MobilenetBackbone
 import mn3.config as config
 
@@ -32,7 +32,7 @@ net = MobilenetBackbone(config.SMALL_BBONE) # MobileNetV3 small backbone
 
 ### Example 3 (how to scale width for network/backbone network):
 
-```{python}
+```python
 from mn3.nets import MobilenetV3
 import mn3.config as config
 
