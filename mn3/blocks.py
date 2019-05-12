@@ -1,5 +1,5 @@
 from torch import nn
-from activations import HSigmoid
+from .activations import HSigmoid
 
 
 class ConvBNAct(nn.Module):

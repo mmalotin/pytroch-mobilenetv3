@@ -31,8 +31,7 @@ class MobilenetConfig:
     def scale_width(self, scale=1, inplace=False):
         tmp = self if inplace else deepcopy(self)
         tmp.bbone_conf.scale_width(scale, inplace=True)
-        tmp.head_channels[:-1] = [int(x * scale)
-                                  for x in tmp.head_channels[:-1]]
+        tmp.head_channels = [int(x * scale) for x in tmp.head_channels]
 
         return tmp
 
@@ -59,12 +58,12 @@ SMALL_BBONE = BackboneConfig(
 
 LARGE = MobilenetConfig(
     bbone_conf=LARGE_BBONE,
-    head_channels=[960, 1280, 1000],
+    head_channels=[960, 1280],
     add_bn=False
     )
 
 SMALL = MobilenetConfig(
     bbone_conf=SMALL_BBONE,
-    head_channels=[576, 1280, 1000],
+    head_channels=[576, 1280],
     add_bn=True
     )

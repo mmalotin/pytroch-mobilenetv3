@@ -1,5 +1,5 @@
-from blocks import Bneck, ConvBNAct
-from activations import HSwish
+from .blocks import Bneck, ConvBNAct
+from .activations import HSwish
 from torch import nn
 
 nls = {
@@ -35,12 +35,12 @@ class MobilenetBackbone(nn.Module):
 
 
 class MobilenetV3(nn.Module):
-    def __init__(self, conf):
+    def __init__(self, conf, n_classes):
         super().__init__()
         self.bbone = MobilenetBackbone(conf.bbone_conf)
 
         pool = nn.AdaptiveAvgPool2d(1)
-        convs = self.__create_convs(conf)
+        convs = self.__create_convs(conf, n_classes)
 
         self.head = nn.Sequential(convs[0], pool, *convs[1:])
 
@@ -51,8 +51,10 @@ class MobilenetV3(nn.Module):
 
         return out.view(bs, -1)
 
-    def __create_convs(self, conf):
-        channels = [conf.bbone_conf.out_channels[-1]] + conf.head_channels
+    def __create_convs(self, conf, n_classes):
+        channels = ([conf.bbone_conf.out_channels[-1]]
+                    + conf.head_channels
+                    + [n_classes])
         bns = [True] + [conf.add_bn] * 2
 
         convs = [ConvBNAct(channels[i], channels[i+1], 1,
